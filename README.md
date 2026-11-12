@@ -131,7 +131,7 @@ src/
   runner.py             run_query, traza formateada y guardado JSON
   simulation.py         LLM/retriever simulados para correr el grafo real sin API keys
 data/chunks.jsonl       Chunks del Código Tributario (BM25 y lectura de artículos)
-tests/                  52 tests, sin dependencias pesadas ni API keys
+tests/                  55 tests, sin dependencias pesadas ni API keys
 traces/                 Trazas JSON de las ejecuciones
 notebooks/demo.ipynb    Demostración del flujo de delegación
 ```
@@ -148,7 +148,7 @@ pip install -r requirements.txt
 **Sin API keys** (grafo, Supervisor y herramientas reales; LLM y retriever simulados):
 
 ```bash
-pytest -q                 # 52 tests
+pytest -q                 # 55 tests
 python main.py simular    # flujo completo con traza
 ```
 

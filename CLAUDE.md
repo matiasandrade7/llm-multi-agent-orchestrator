@@ -54,7 +54,7 @@ supervisor`, `finalize → END`.
 ```bash
 python3.12 -m venv .venv && source .venv/bin/activate   # Python 3.12+
 pip install -r requirements.txt
-pytest -q                          # 52 tests, sin API keys ni torch
+pytest -q                          # 55 tests, sin API keys ni torch
 python main.py simular             # flujo completo simulado
 python main.py preguntar "..."     # real: Gemini + Pinecone (requiere .env)
 python main.py demo                # 3 consultas reales -> traces/traza_demo_{1,2,3}.json

@@ -98,6 +98,20 @@ def _finish(reason: str) -> SupervisorDecision:
     return SupervisorDecision(next="FINISH", instruction="", reason=reason)
 
 
+CALCULATION_INSTRUCTION = "Realizá los cálculos que pide la pregunta con las cifras de la evidencia."
+
+
+def _calculation_still_pending(target: str, state: dict[str, Any], calls: Any) -> bool:
+    """¿El investigador agotó sus llamadas pero falta el cálculo que la pregunta pide?"""
+    return (
+        target == "research"
+        and has_valid_research(state)
+        and needs_calculation(state["question"])
+        and not contributions_of(state, "analyst")
+        and calls["analyst"] < config.MAX_CALLS_PER_AGENT
+    )
+
+
 def apply_guards(decision: SupervisorDecision, state: dict[str, Any]) -> tuple[SupervisorDecision, str | None]:
     """Corrige decisiones que romperían las reglas del sistema. Devuelve (decisión, motivo del override)."""
     steps = state.get("step_count", 0)
@@ -115,6 +129,16 @@ def apply_guards(decision: SupervisorDecision, state: dict[str, Any]) -> tuple[S
 
     # 3) Tope de llamadas por especialista (ejecución + refinamientos).
     if target in ("research", "analyst") and calls[target] >= config.MAX_CALLS_PER_AGENT:
+        if _calculation_still_pending(target, state, calls):
+            # El investigador ya dio todo lo que podía: en vez de cerrar sin el cálculo, se pasa al analista.
+            return (
+                SupervisorDecision(
+                    next="analyst",
+                    instruction=CALCULATION_INSTRUCTION,
+                    reason=f"[guarda] 'research' llegó al tope ({calls[target]} llamadas): se deriva el cálculo al analista.",
+                ),
+                "max_calls_to_analyst",
+            )
         return _finish(f"'{target}' ya se ejecutó {calls[target]} veces (tope alcanzado)."), "max_calls"
 
     if override is None:
@@ -140,7 +164,7 @@ def fallback_decision(state: dict[str, Any]) -> SupervisorDecision:
     if needs_calculation(state["question"]) and not contributions_of(state, "analyst"):
         return SupervisorDecision(
             next="analyst",
-            instruction="Realizá los cálculos que pide la pregunta con las cifras de la evidencia.",
+            instruction=CALCULATION_INSTRUCTION,
             reason="[respaldo] la pregunta requiere cálculo",
         )
     return _finish("[respaldo] ya hay evidencia suficiente")

@@ -57,6 +57,30 @@ def test_tope_de_llamadas_por_agente_corta_el_bucle_de_refinamientos() -> None:
     assert out.next == "FINISH" and override == "max_calls"
 
 
+PREGUNTA_CON_CALCULO = "Pagué con 100 días de atraso un tributo de $50.000. ¿Qué multa corresponde?"
+
+
+def test_investigador_agotado_con_calculo_pendiente_deriva_al_analista() -> None:
+    contribs = [contribution("research", ["94"]) for _ in range(config.MAX_CALLS_PER_AGENT)]
+    out, override = apply_guards(decision("research", "otra vez"), state(contribs, question=PREGUNTA_CON_CALCULO))
+    assert out.next == "analyst" and override == "max_calls_to_analyst"
+    assert out.instruction  # el analista recibe una instrucción concreta
+
+
+def test_investigador_agotado_no_deriva_si_el_analista_ya_intervino() -> None:
+    contribs = [contribution("research", ["94"]) for _ in range(config.MAX_CALLS_PER_AGENT)] + [contribution("analyst")]
+    out, override = apply_guards(decision("research", "otra vez"), state(contribs, question=PREGUNTA_CON_CALCULO))
+    assert out.next == "FINISH" and override == "max_calls"
+
+
+def test_investigador_agotado_no_deriva_si_la_pregunta_no_pide_calculo() -> None:
+    contribs = [contribution("research", ["38"]) for _ in range(config.MAX_CALLS_PER_AGENT)]
+    out, override = apply_guards(
+        decision("research", "otra vez"), state(contribs, question="¿Qué es el conjunto económico?")
+    )
+    assert out.next == "FINISH" and override == "max_calls"
+
+
 def test_sin_evidencia_y_con_investigador_agotado_se_finaliza_sin_inventar() -> None:
     contribs = [contribution("research", [], status="error") for _ in range(config.MAX_CALLS_PER_AGENT)]
     out, _ = apply_guards(decision("FINISH"), state(contribs))
