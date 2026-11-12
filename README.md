@@ -11,6 +11,8 @@ especializados para responder consultas sobre el Código Tributario uruguayo (De
 
 > **Requiere Python 3.12 o superior.**
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasandrade7/llm-multi-agent-orchestrator/blob/main/notebooks/demo.ipynb)
+
 Este proyecto reutiliza el índice de Pinecone de la pre-entrega 4 (`llm-rag-pinecone`) y el patrón de
 agente ReAct de la pre-entrega 5. No hay IDs ni modelos fijos en el código: todo sale de `.env`.
 
@@ -237,5 +239,3 @@ Las tres corridas terminaron sin errores. El notebook `notebooks/demo.ipynb` eje
 serializable; los nodos son `async`; la configuración sale de variables de entorno. Eso permite
 sumar después una API asíncrona, persistencia de hilos, observabilidad y aprobación humana
 sin reescribir el grafo.
-
-*Información orientativa basada en el texto del Código Tributario; no constituye asesoramiento legal.*
