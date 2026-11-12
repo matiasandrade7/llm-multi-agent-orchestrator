@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "origen": "real",
+    "fecha": "2026-11-12T15:12:32"
+  },
+  "pregunta": "¿Cuál es la receta tradicional del chivito uruguayo?",
+  "pasos_supervisor": 2,
+  "trazas": [
+    {
+      "node": "supervisor",
+      "step": 0,
+      "detail": "→ research · [guarda] sin evidencia del investigador: se exige investigar primero · origen=llm · override=sin evidencia del investigador: se exige investigar primero",
+      "ms": 6957.7
+    },
+    {
+      "node": "research",
+      "step": 1,
+      "detail": "ok · herramientas: search_articles · artículos: 112, 94, 57, 51, 31",
+      "ms": 10448.5
+    },
+    {
+      "node": "supervisor",
+      "step": 1,
+      "detail": "→ FINISH · La pregunta del usuario sobre gastronomia no esta regulada por el Codigo Tributario y el investigador ya indico correctamente la falta de articulos sobre el tema, por lo que no es posible ni necesario continuar con la busqueda ni analisis. · origen=llm",
+      "ms": 1188.4
+    },
+    {
+      "node": "finalize",
+      "step": 2,
+      "detail": "modo=llm",
+      "ms": 7815.7
+    }
+  ],
+  "contribuciones": [
+    {
+      "agent": "research",
+      "step": 1,
+      "instruction": "¿Cuál es la receta tradicional del chivito uruguayo?",
+      "output": "Como investigador del Código Tributario de Uruguay, debo informarle que esta fuente normativa regula exclusivamente los tributos, obligaciones, infracciones, sanciones y procedimientos fiscales del país, por lo que **no contiene información sobre la receta tradicional del chivito uruguayo** ni sobre gastronomía.",
+      "articles": [
+        "112",
+        "94",
+        "57",
+        "51",
+        "31"
+      ],
+      "tools_used": [
+        "search_articles"
+      ],
+      "status": "ok",
+      "ms": 10448.5
+    }
+  ],
+  "errores": [],
+  "respuesta_final": "El Código Tributario de Uruguay regula exclusivamente los tributos, obligaciones, infracciones, sanciones y procedimientos fiscales del país, por lo que no contiene información sobre la receta tradicional del chivito uruguayo ni sobre gastronomía.\n\nInformación orientativa basada en el texto del Código Tributario; no constituye asesoramiento legal.\n\nArtículos consultados: 112, 94, 57, 51, 31."
+}

@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "origen": "SIMULACION",
+    "fecha": "2026-11-12T14:23:41"
+  },
+  "pregunta": "Pagué con 100 días de atraso un tributo de $50.000. ¿Qué multa por mora corresponde y de cuánto sería?",
+  "pasos_supervisor": 3,
+  "trazas": [
+    {
+      "node": "supervisor",
+      "step": 0,
+      "detail": "→ research · Todavía no hay evidencia: hay que investigar primero. · origen=llm",
+      "ms": 0.1
+    },
+    {
+      "node": "research",
+      "step": 1,
+      "detail": "ok · herramientas: search_articles, read_article · artículos: 33, 93, 94, 97",
+      "ms": 8.9
+    },
+    {
+      "node": "supervisor",
+      "step": 1,
+      "detail": "→ analyst · La pregunta pide un monto y ya hay artículo citado. · origen=llm",
+      "ms": 0.0
+    },
+    {
+      "node": "analyst",
+      "step": 2,
+      "detail": "ok · herramientas: calculate_percentage · artículos: -",
+      "ms": 2.2
+    },
+    {
+      "node": "supervisor",
+      "step": 2,
+      "detail": "→ FINISH · Rúbrica cumplida: artículo citado, cálculo con fórmula y dato faltante declarado. · origen=llm",
+      "ms": 0.0
+    },
+    {
+      "node": "finalize",
+      "step": 3,
+      "detail": "modo=llm",
+      "ms": 0.4
+    }
+  ],
+  "contribuciones": [
+    {
+      "agent": "research",
+      "step": 1,
+      "instruction": "Buscá en el Código Tributario el artículo sobre mora y multas por pago fuera de plazo, con los porcentajes y plazos de cada tramo.",
+      "output": "[SIMULACIÓN] Informe del investigador. Art. 94 (Mora): la mora se sanciona con una multa sobre el tributo no pagado en término y un recargo mensual. Multa: A) 5% si se paga dentro de los 5 días hábiles siguientes al vencimiento; B) 10% entre ese plazo y 90 días corridos; C) 20% pasados los 90 días corridos. El recargo mensual lo fija el Poder Ejecutivo (no figura la tasa en el artículo).",
+      "articles": [
+        "33",
+        "93",
+        "94",
+        "97"
+      ],
+      "tools_used": [
+        "search_articles",
+        "read_article"
+      ],
+      "status": "ok",
+      "ms": 8.9
+    },
+    {
+      "agent": "analyst",
+      "step": 2,
+      "instruction": "Con los tramos de la evidencia, determiná cuál corresponde a 100 días de atraso y calculá la multa sobre $50.000.",
+      "output": "[SIMULACIÓN] Con 100 días de atraso corresponde el tramo C del Art. 94 (más de 90 días): 20%. Cálculo: 20% de 50000 = 10000. Dato faltante: la tasa del recargo mensual (la fija el Poder Ejecutivo y no figura en el artículo), por lo que no se calculó.",
+      "articles": [],
+      "tools_used": [
+        "calculate_percentage"
+      ],
+      "status": "ok",
+      "ms": 2.2
+    }
+  ],
+  "errores": [],
+  "respuesta_final": "[SIMULACIÓN] Al pagar con 100 días de atraso corresponde la multa del 20% sobre el tributo no pagado en término (Art. 94, literal C). Sobre $50.000, la multa es de $10.000. Además se aplica un recargo mensual, cuya tasa fija el Poder Ejecutivo y no figura en el artículo, por lo que no puede calcularse con este texto.\n\nInformación orientativa basada en el texto del Código Tributario; no constituye asesoramiento legal.\n\nArtículos consultados: 33, 93, 94, 97."
+}

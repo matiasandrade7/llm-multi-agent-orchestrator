@@ -1,0 +1,27 @@
+# Requiere Python 3.12 o superior.
+# Instalación completa (consultas reales):   pip install -r requirements.txt
+# Para correr SOLO tests y la simulación bastan las dos secciones "núcleo" y "tests".
+
+# --- núcleo (grafo, supervisor, herramientas) ---
+langgraph>=1.0
+langchain-core>=1.0
+pydantic>=2.7
+python-dotenv>=1.0
+
+# --- RAG: BM25 + Pinecone (solo para consultas reales) ---
+langchain-community>=0.4
+langchain-classic>=1.0
+langchain-huggingface>=1.0
+langchain-pinecone>=0.2
+pinecone>=5.0
+sentence-transformers>=3.0
+rank-bm25>=0.2.2
+
+# --- LLM: se instala el del proveedor elegido en LLM_PROVIDER ---
+langchain-google-genai>=3.0
+# langchain-openai>=1.0       # si LLM_PROVIDER=openai
+# langchain-anthropic>=1.0    # si LLM_PROVIDER=anthropic
+
+# --- tests ---
+pytest>=8.0
+pytest-asyncio>=0.23

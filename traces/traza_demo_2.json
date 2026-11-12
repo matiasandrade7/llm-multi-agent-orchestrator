@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "origen": "real",
+    "fecha": "2026-11-12T15:12:05"
+  },
+  "pregunta": "¿En cuántos años prescribe el derecho al cobro de los tributos y cuándo se amplía ese plazo?",
+  "pasos_supervisor": 2,
+  "trazas": [
+    {
+      "node": "supervisor",
+      "step": 0,
+      "detail": "→ research · Es el primer paso necesario según las reglas de flujo y la rúbrica; no hay evidencia previa del investigador y se requiere consultar el Código Tributario. · origen=llm",
+      "ms": 6515.5
+    },
+    {
+      "node": "research",
+      "step": 1,
+      "detail": "ok · herramientas: search_articles, read_article · artículos: 39, 38, 88, 28, 94",
+      "ms": 6428.7
+    },
+    {
+      "node": "supervisor",
+      "step": 1,
+      "detail": "→ FINISH · El investigador ya cito los articulos pertinentes (Articulo 38 y siguientes), el plazo general de cinco anos y las situaciones de ampliacion a diez anos. La pregunta no requiere calculos matematicos complejos adicionales, por lo que la rubrica esta cumplida y se puede finalizar. · origen=llm",
+      "ms": 17710.6
+    },
+    {
+      "node": "finalize",
+      "step": 2,
+      "detail": "modo=llm",
+      "ms": 5833.5
+    }
+  ],
+  "contribuciones": [
+    {
+      "agent": "research",
+      "step": 1,
+      "instruction": "Busca y cita los artículos del Código Tributario de Uruguay que establecen el plazo de prescripción del cobro de tributos y las causales o situaciones por las cuales dicho plazo se amplía.",
+      "output": "De acuerdo con el Código Tributario de Uruguay, los artículos pertinentes sobre el plazo de prescripción del cobro de tributos y su ampliación son los siguientes:\n\n### Artículo 38 - Prescripción\n* **Plazo general:** El derecho al cobro de los tributos prescribirá a los **cinco años** contados a partir de la terminación del año civil en que se produjo el hecho gravado. Para los impuestos de carácter anual que gravan ingresos o utilidades, se entenderá que el hecho gravado se produce al cierre del ejercicio económico.\n* **Ampliación del plazo:** El término de prescripción se ampliará a **diez años** en las siguientes situaciones:\n  1. Cuando el contribuyente o responsable haya incurrido en defraudación.\n  2. Cuando no cumpla con las obligaciones de inscribirse, de denunciar el acaecimiento del hecho generador o de presentar las declaraciones.\n  3. En los casos en que el tributo se determina por el organismo recaudador, cuando éste no tuvo conocimiento del hecho.\n\n*(Nota: Adicionalmente, el Artículo 39 regula la interrupción de la prescripción).*",
+      "articles": [
+        "39",
+        "38",
+        "88",
+        "28",
+        "94"
+      ],
+      "tools_used": [
+        "search_articles",
+        "read_article"
+      ],
+      "status": "ok",
+      "ms": 6428.7
+    }
+  ],
+  "errores": [],
+  "respuesta_final": "El derecho al cobro de los tributos prescribe en el plazo general de **cinco años** contados a partir de la terminación del año civil en que se produjo el hecho gravado (Art. 38). Para los impuestos de carácter anual que gravan ingresos o utilidades, se entiende que el hecho gravado se produce al cierre del ejercicio económico (Art. 38).\n\nEl plazo se amplía a **diez años** en las siguientes situaciones (Art. 38):\n1. Cuando el contribuyente o responsable haya incurrido en defraudación.\n2. Cuando no cumpla con las obligaciones de inscribirse, de denunciar el acaecimiento del hecho generador o de presentar las declaraciones.\n3. En los casos en que el tributo se determina por el organismo recaudador, cuando éste no tuvo conocimiento del hecho.\n\nInformación orientativa basada en el texto del Código Tributario; no constituye asesoramiento legal.\n\nArtículos consultados: 39, 38, 88, 28, 94."
+}
